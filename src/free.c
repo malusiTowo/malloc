@@ -35,5 +35,4 @@ void free(void * ptr)
     } else
         tmp->_isFree = true;
     pthread_mutex_unlock(&global_malloc_lock);
-    return;
 }

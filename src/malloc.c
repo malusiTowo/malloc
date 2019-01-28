@@ -7,13 +7,12 @@
 
 #include"my_malloc.h"
 
-
 void *getFreeMem(size_t size)
 {
     if (!head)
         return NULL;
     meta *tmp = head;
-    for(; tmp->next != NULL; tmp = tmp->next) {
+    for (; tmp->next != NULL; tmp = tmp->next) {
         if (tmp->_isFree && tmp->_size <= size)
             return (void *)tmp;
     }
