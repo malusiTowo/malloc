@@ -14,6 +14,7 @@
 #include<stdbool.h>
 #include<string.h>
 #include<pthread.h>
+
 typedef struct meta_t
 {
     size_t _size;
@@ -35,5 +36,5 @@ void *getFreeMem(size_t);
 void releaseMem();
 void initNode(meta **, void *, size_t);
 void addToEnd(meta **);
-
+size_t getSize(size_t );
 #endif

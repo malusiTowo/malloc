@@ -60,6 +60,7 @@ void releaseMem()
 
 void *malloc(size_t size)
 {
+    size = getSize(size);
     size_t total_size = sizeof(meta) + size;
     void *block = NULL;
     if (size <= 0)
@@ -67,7 +68,7 @@ void *malloc(size_t size)
     pthread_mutex_lock(&global_malloc_lock);
     meta *node = (meta *)getFreeMem(size);
     if (node) {
-        node->_isFree = false;
+        node->_isFree = false; 
         pthread_mutex_unlock(&global_malloc_lock);
         return (void *)(node + 1);
     }

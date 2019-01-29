@@ -13,9 +13,11 @@ UT	=	units
 
 SRC_DIR	=	./src/
 
-SRC	=	$(SRC_DIR)malloc.c \
-		$(SRC_DIR)realloc.c \
-		$(SRC_DIR)free.c 
+SRC	=	$(SRC_DIR)realloc.c \
+		$(SRC_DIR)utils.c \
+		$(SRC_DIR)malloc.c \
+		$(SRC_DIR)free.c \
+		$(SRC_DIR)show_alloc_mem.c
 
 CFLAGS	=	-W -Wall -Wextra -Werror -fPIC -shared
 
