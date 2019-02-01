@@ -31,10 +31,11 @@ pthread_mutex_t global_malloc_lock;
 void *malloc(size_t);
 void *realloc(void *, size_t);
 void free(void *);
-void show_alloc_mem();
-void *getFreeMem(size_t);
-void releaseMem();
-void initNode(meta **, void *, size_t);
-void addToEnd(meta **);
-size_t getSize(size_t );
+void show_alloc_mem(void);
+void *get_free_mem(size_t);
+void release_mem(void);
+void init_node(meta **, void *, size_t);
+void add_to_end(meta **);
+size_t get_size(size_t );
+
 #endif

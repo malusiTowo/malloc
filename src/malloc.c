@@ -7,7 +7,7 @@
 
 #include"my_malloc.h"
 
-void *getFreeMem(size_t size)
+void *get_free_mem(size_t size)
 {
     if (!head)
         return NULL;
@@ -19,19 +19,19 @@ void *getFreeMem(size_t size)
     return NULL;
 }
 
-void addToEnd(meta **node)
+void add_to_end(meta **node)
 {
     if (!tail || !node)
         return;
     if (tail->_isFree)
-        releaseMem();
+        release_mem();
     meta *tmp = tail;
     tmp->next = (*node);
     (*node)->prev = tmp;
     tail = (*node);
 }
 
-void initNode(meta **node, void *block, size_t size)
+void init_node(meta **node, void *block, size_t size)
 {
     (*node) = block;
     (*node)->_size = size;
@@ -42,10 +42,10 @@ void initNode(meta **node, void *block, size_t size)
     if (!head)
         head = tail = (*node);
     else
-        addToEnd(node);
+        add_to_end(node);
 }
 
-void releaseMem()
+void release_mem(void)
 {
     size_t size = 0;
     meta *iter = tail;
@@ -60,24 +60,24 @@ void releaseMem()
 
 void *malloc(size_t size)
 {
-    size = getSize(size);
+    size = get_size(size);
     size_t total_size = sizeof(meta) + size;
     void *block = NULL;
     if (size <= 0)
         return NULL;
     pthread_mutex_lock(&global_malloc_lock);
-    meta *node = (meta *)getFreeMem(size);
+    meta *node = (meta *)get_free_mem(size);
     if (node) {
-        node->_isFree = false; 
+        node->_isFree = false;
         pthread_mutex_unlock(&global_malloc_lock);
         return (void *)(node + 1);
     }
-	block = sbrk((total_size ));
-	if (block == (void*)-1) {
+    block = sbrk((total_size));
+    if (block == (void*)-1) {
         pthread_mutex_unlock(&global_malloc_lock);
         return NULL;
     }
-    initNode(&node, block, size);
+    init_node(&node, block, size);
     pthread_mutex_unlock(&global_malloc_lock);
     return (void *)(node + 1);
 }
