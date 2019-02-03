@@ -73,7 +73,7 @@ void *malloc(size_t size)
         return (void *)(node + 1);
     }
     block = sbrk((total_size));
-    if (block == (void*)-1) {
+    if (block == (void *)-1) {
         pthread_mutex_unlock(&global_malloc_lock);
         return NULL;
     }
