@@ -37,5 +37,7 @@ void release_mem(void);
 void init_node(meta **, void *, size_t);
 void add_to_end(meta **);
 size_t get_size(size_t );
+void destroy_mem(meta **ptr);
+size_t destroy_end_nodes(void);
 
 #endif
