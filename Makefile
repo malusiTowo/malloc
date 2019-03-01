@@ -7,7 +7,7 @@
 
 UT_DIR	=	./tests/
 
-UT_SRC	=	$(UT_DIR)test.cpp\
+UT_SRC	=	$(UT_DIR)test.c\
 
 UT	=	units
 
@@ -19,9 +19,9 @@ SRC	=	$(SRC_DIR)realloc.c \
 		$(SRC_DIR)free.c \
 		$(SRC_DIR)show_alloc_mem.c
 
-CFLAGS	=	-W -Wall -Wextra -Werror -fPIC -shared
+CFLAGS	=	-W -Wall -Wextra -Werror
 
-LDFLAGS	=	-lcriterion -lgcov -coverage
+LDFLAGS	=  -lcriterion -lgcov --coverage -fprofile-arcs -ftest-coverage
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -33,20 +33,20 @@ NAME	=	libmy_malloc.so
 all:	$(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(SRC) $(CFLAGS)
+	gcc -o $(NAME) $(SRC) -fPIC -shared
 	rm -f $(OBJ)
 
 gdb:
 	g++ -o $(NAME) $(SRC) $(MAIN) $(CFLAGS) -g3
 
 tests_run:
-	g++ -o $(UT) $(UT_SRC) $(SRC) $(CFLAGS) $(LDFLAGS)
+	gcc -o $(UT) $(UT_SRC) $(LDFLAGS)
 	./$(UT)
 
 clean:
 	rm -f $(OBJ)
 
-fclean: 	clean
+fclean: clean
 		rm -f $(NAME)
 		rm -f $(OBJ)
 		rm -f $(UT_DIR)*.gcno
