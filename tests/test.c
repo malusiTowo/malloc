@@ -12,3 +12,8 @@ Test(Test1, test3)
 {
     cr_expect(1 == 1, "should be true");
 }
+
+Test(Test1, test3)
+{
+    cr_expect(0 == 1, "should be false");
+}
