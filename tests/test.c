@@ -15,5 +15,5 @@ Test(Test1, test3)
 
 Test(Test2, test4)
 {
-    cr_expect(0 == 1, "should be false");
+    cr_expect_neq(0 == 1, "should be false");
 }
