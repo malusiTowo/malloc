@@ -7,13 +7,3 @@ jobs:
     steps:
       - checkout
       - run: make tests_run
-
-      - restore_cache:
-          keys:
-            - v1-my-project-{{ checksum "/src/malloc.c"" }}
-            - v1-my-project-
-
-      - save_cache:
-          key: v1-my-project-{{ checksum "/src/malloc.c" }}
-          -paths:
-            - ./
