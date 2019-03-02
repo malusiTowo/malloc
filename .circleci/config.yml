@@ -15,3 +15,5 @@ jobs:
 
       - save_cache:
           key: v1-my-project-{{ checksum "/src/malloc.c" }}
+          -paths:
+            - ./
